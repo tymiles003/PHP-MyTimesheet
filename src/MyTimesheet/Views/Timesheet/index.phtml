@@ -1,0 +1,12 @@
+<?php $this->getHelper('TimesheetView')->render($this->file['id']);
+
+$helperActions = $this->getHelper('Actions')->addAction('precedent')
+											->addAction('print')
+											->addAction('new')
+											->setActionParameters('precedent', array('url'=>'/'))
+											->setActionParameters('new', array('url'=>'/timesheet?id=' . $this->timesheet->getId()));
+
+$this->setPlaceholder('content-footer', null, 
+		'<div class="container-fluid"><div class="row">' . $this->partialRender('Timesheet/editTask') . '</div></div>' .
+		'<div class="container-fluid"><div class="row">' . $helperActions->render() . '</div></div>' );
+?>

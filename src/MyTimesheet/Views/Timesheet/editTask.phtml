@@ -1,0 +1,28 @@
+<?php 
+	use Symfony\Component\Yaml\Escaper;
+$task = 
+	( isset($_GET['week']) && isset($_GET['task']) && $this->timesheet->hasTask($_GET['week'], $_GET['task']) ? 
+		$this->timesheet->getTask($_GET['week'], $_GET['task']) :
+		new MyTimesheet\Model\Task()
+	);
+?>
+
+<form action="" method="post" class="hidden-print row">
+	<div class="form-group col-md-2">
+		<input type="hidden" name="ispost" value="1">
+		<input type="hidden" name="id" value="<?php echo $this->file['id']?>">
+		<label class="hidden-md hidden-lg control-label" for="form-in-week">Week</label>
+		<input type="number" name="week" min="0" max="54" value="<?php echo $task->getWeek() ?>" size="1" class="form-control" id="form-in-week" placeholder="Week"/>
+	</div>
+	<div class="form-group col-md-2">
+		<label class="hidden-md hidden-lg control-label" for="form-in-time">Days</label>
+		<input type="number" name="time" min="0" max="7" step="0.5" value="<?php echo (0<$task->getTime()?$task->getTime():'') ?>" class="form-control" id="form-in-time" placeholder="Days"/>
+	</div>
+	<div class="form-group col-md-7">
+		<label class="hidden-md hidden-lg control-label" for="form-in-time">Description</label>
+		<input type="text" name="name" value="<?php echo htmlentities($task->getName()) ?>" class="form-control" id="form-in-name" placeholder="Description"/>
+	</div>
+	<div class="form-group col-md-1">
+		<button type="submit" class="btn btn-default">Save</button>
+	</div>
+</form>

@@ -1,0 +1,59 @@
+<table class="table">
+	<theader>
+		<tr>
+			<td>Week</td>
+			<td>Days</td>
+			<td>Description.</td>
+			<td class="hidden-print col-md-1">Actions</td>
+		</tr>
+	</theader>
+	<tboby>
+		<?php foreach($this->timesheet->getTasks() as $weekNum=>$tasks): ?>
+			<?php foreach($tasks as $task): ?>
+			<tr class="week_<?php echo $weekNum&1?'i':'p' ?>">
+				<td><?php echo $weekNum ?></td>
+				<td><?php echo $task->getTime() ?></td>
+				<td><?php echo $task->getName() ?></td>
+				<td class="hidden-print btn-toolbar" role="toolbar">
+					<span class="btn-group" role="group">
+						<a aria-label="delete" href="/timesheet/uptask?id=<?php echo $this->timesheet->getId() ?>&week=<?php echo $weekNum ?>&task=<?php echo $task->getIndex() ?>">
+						<span class="icon-pencil glyphicon glyphicon-chevron-up" aria-hidden="true"></span>
+						</a>
+						<a aria-label="delete" href="/timesheet/downtask?id=<?php echo $this->timesheet->getId() ?>&week=<?php echo $weekNum ?>&task=<?php echo $task->getIndex() ?>">
+						<span class=" icon-pencil glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
+						</a>
+					</span>
+					<span class="btn-group" role="group">
+						<a aria-label="edit" href="/timesheet?id=<?php echo $this->timesheet->getId() ?>&week=<?php echo $weekNum ?>&task=<?php echo $task->getIndex() ?>">
+						<span class=" icon-pencil glyphicon glyphicon-edit" aria-hidden="true"></span>
+						</a>
+						<a aria-label="delete" href="/timesheet/deletetask?id=<?php echo $this->timesheet->getId() ?>&week=<?php echo $weekNum ?>&task=<?php echo $task->getIndex() ?>">
+						<span class=" icon-pencil glyphicon glyphicon-trash" aria-hidden="true"></span>
+						</a>
+					</span>
+				</td>
+			</tr>
+			<?php endforeach; ?>
+			<tr class="week_total week_<?php echo $weekNum&1?'i':'p' ?>">
+				<td><?php echo $weekNum ?></td>
+				<td><?php echo $this->timesheet->getTasksTimeByWeek($weekNum) ?></td>
+				<td class="hidden-print row text-right" colspan="2">
+					<div class="col-md-1 col-xs-2 col-sm-2 col-md-offset-10 col-xs-offset-8 col-sm-offset-8 text-center">
+						<a aria-label="export to HTML" href="/timesheet/export?type=html&id=<?php echo $this->timesheet->getId() ?>&week=<?php echo $weekNum ?>">
+							<span class=" icon-pencil glyphicon glyphicon-export" aria-hidden="true"></span>
+							html
+						</a>
+					</div>
+					<div class="col-md-1 col-xs-2 col-sm-2 text-center">
+						<a aria-label="export to HTML" href="/timesheet/export?type=csv&id=<?php echo $this->timesheet->getId() ?>&week=<?php echo $weekNum ?>">
+							<span class=" icon-pencil glyphicon glyphicon-export" aria-hidden="true"></span>
+							csv
+						</a>
+					</div>
+				</td>
+			</tr>
+		<?php endforeach; ?>
+	</tboby>
+	<tfoot>
+	</tfoot>
+</table>

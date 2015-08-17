@@ -1,0 +1,17 @@
+<tr>
+	<td><?php echo $this->file['name'] ?></td>
+	<td><?php echo $this->file['filename'] ?></td>
+	<td class="hidden-print btn-toolbar" role="toolbar">
+		<span class="btn-group col-md-3 text-left" role="group">
+			<a href="/timesheet?id=<?php echo $this->file['id'] ?>">View</a>
+		</span>
+		<span class="btn-group" role="group">
+			<a aria-label="edit" href="/index?id=<?php echo $this->file['id'] ?>">
+			<span class=" icon-pencil glyphicon glyphicon-edit" aria-hidden="true"></span>
+			</a>
+			<a aria-label="delete" href="/index?id=<?php echo $this->file['id'] ?>">
+			<span class=" icon-pencil glyphicon glyphicon-trash" aria-hidden="true"></span>
+			</a>
+		</span>
+	</td>
+</tr>

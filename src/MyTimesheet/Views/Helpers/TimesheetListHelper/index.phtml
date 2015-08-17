@@ -1,0 +1,16 @@
+<table class="table">
+	<thead>
+		<tr></tr>
+	</thead>
+	<tbody>
+		<?php
+			foreach($this->files as $file):
+				$this->setParameter('file', $file);
+				$this->render('Helpers\TimesheetListHelper\item');
+			endforeach;
+		?>
+	</tbody>
+	<tfoot>
+		<tr></tr>
+	</tfoot>
+</table>

@@ -1,0 +1,25 @@
+<table  class="table">
+	<theader>
+		<tr>
+			<td>Days</td>
+			<td>Description</td>
+		</tr>
+	</theader>
+	<tboby>
+		<?php foreach($this->timesheet->getTasksWeek($this->weekindex) as $task): ?>
+			<tr class="week_<?php echo $weekNum&1?'i':'p' ?>">
+				<td><?php echo $task->getTime() ?></td>
+				<td><?php echo $task->getName() ?></td>
+			</tr>
+		<?php endforeach; ?>
+	</tboby>
+	<tfoot>
+	</tfoot>
+</table>
+
+<?php
+$helperActions = $this->getHelper('Actions')->addAction('precedent')->addAction('print')
+											->setActionParameters('precedent', array('url'=>'/timesheet?id=' . $this->timesheet->getId()));
+
+$this->setPlaceholder('content-footer', null, $helperActions->render());
+?>

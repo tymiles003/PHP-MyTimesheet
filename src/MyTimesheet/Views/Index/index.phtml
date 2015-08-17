@@ -1,0 +1,10 @@
+<?php $this->getHelper('TimesheetList')->render();
+
+$helperActions = $this->getHelper('Actions')
+					->addAction('print')
+					->addAction('new')
+					->setActionParameters('new', array('url'=>'/'));
+
+	  $this->setPlaceholder('content-footer', null, 
+  		'<div class="container-fluid"><div class="row">' . $this->partialRender('Timesheet/create') . '</div></div>' . 
+		'<div class="container-fluid"><div class="row">' . $helperActions->render() . '</div></div>' );

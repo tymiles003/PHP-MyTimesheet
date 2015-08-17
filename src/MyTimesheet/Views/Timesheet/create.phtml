@@ -1,0 +1,14 @@
+<form action="" method="post" class="hidden-print row">
+	<div class="form-group col-md-3">
+		<input type="hidden" name="ispost" value="true">
+		<label class="hidden-md hidden-lg control-label" for="form-in-projectname">Project name</label>
+		<input type="text" name="projectname" pattern=".{3,}"  required  title="Project name : 3 characters minimum" value="<?php echo $this->timesheet['name']; ?>" class="form-control" id="form-in-projectname" placeholder="Project name"/>
+	</div>
+	<div class="form-group col-md-7">
+		<label class="hidden-md hidden-lg control-label" for="form-in-filename">Filename</label>
+		<input type="text" name="filename" pattern=".{3,}"  required  title="Filename : 3 characters minimum" value="<?php echo $this->timesheet['filename']; ?>" class="form-control" id="form-in-filename" placeholder="Filename"/>
+	</div>
+	<div class="form-group col-md-2">
+		<button type="submit" class="btn btn-default">Create</button>
+	</div>
+</form>

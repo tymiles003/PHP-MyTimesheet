@@ -1,0 +1,22 @@
+{
+    "name": "ncr7/MyTimesheet",
+    "description": "Ncr7 MyTimesheet",
+    "autoload" : {
+        "psr-4" : {
+            "MyTimesheet\\" : "src/MyTimesheet"
+        }
+    },
+    "require": {
+        "symfony/console": "~2.7",
+        "symfony/event-dispatcher": "~2.7",
+        "symfony/debug": "~2.7",
+        "symfony/yaml": "~2.7",
+        "twbs/bootstrap": "~3.3"
+    },
+    "authors": [
+        {
+            "name": "nico57c"
+        }
+    ],
+    "minimum-stability": "stable"
+}

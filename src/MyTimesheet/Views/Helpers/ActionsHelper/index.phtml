@@ -1,0 +1,7 @@
+<div class="btn-group hidden-print" role="group" aria-label="timesheet actions">
+	<?php
+	foreach($this->actions as $actionname):
+		$this->render('Helpers\ActionsHelper\action-' . $actionname);
+	endforeach;
+	?>
+</div>

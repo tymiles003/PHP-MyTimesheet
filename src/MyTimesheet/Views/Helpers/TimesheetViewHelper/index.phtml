@@ -16,10 +16,10 @@
 				<td><?php echo $task->getName() ?></td>
 				<td class="hidden-print btn-toolbar" role="toolbar">
 					<span class="btn-group" role="group">
-						<a aria-label="delete" href="/timesheet/uptask?id=<?php echo $this->timesheet->getId() ?>&week=<?php echo $weekNum ?>&task=<?php echo $task->getIndex() ?>">
+						<a class="event_uptask" aria-label="uptask" data-taskindex="<?php echo $task->getIndex() ?>" data-href="/timesheet/uptask?id=<?php echo $this->timesheet->getId() ?>&week=<?php echo $weekNum ?>&task=">
 						<span class="icon-pencil glyphicon glyphicon-chevron-up" aria-hidden="true"></span>
 						</a>
-						<a aria-label="delete" href="/timesheet/downtask?id=<?php echo $this->timesheet->getId() ?>&week=<?php echo $weekNum ?>&task=<?php echo $task->getIndex() ?>">
+						<a class="event_downtask" aria-label="downtask" data-taskindex="<?php echo $task->getIndex() ?>" data-href="/timesheet/downtask?id=<?php echo $this->timesheet->getId() ?>&week=<?php echo $weekNum ?>&task=">
 						<span class=" icon-pencil glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
 						</a>
 					</span>
@@ -57,3 +57,44 @@
 	<tfoot>
 	</tfoot>
 </table>
+<script type="text/javascript">
+
+	$(".event_uptask").bind('click', function(){
+		
+		if(parseInt($(this).attr('data-taskindex'))!=0){
+			$.ajax({
+			  url: $(this).attr('data-href') + $(this).attr('data-taskindex'),
+			  context: this
+			}).done(function() {
+				
+			  $('a', $(this).parents('tr').prev()).attr('data-taskindex', parseInt($(this).attr('data-taskindex')));
+			  $('a', $(this).parent()).attr('data-taskindex', parseInt($(this).attr('data-taskindex'))-1);
+	
+			  $(this).parents('tr').insertBefore( $(this).parents('tr').prev() );
+			  
+			});
+		}
+		return false;
+	});
+	
+	$(".event_downtask").bind('click', function(){
+		
+		if(!$(this).parents('tr').next().hasClass('week_total')){
+			$.ajax({
+				  url: $(this).attr('data-href') + $(this).attr('data-taskindex'),
+				  context: this
+			}).done(function() {
+				
+			  $('a', $(this).parents('tr').next()).attr('data-taskindex', parseInt($(this).attr('data-taskindex')));
+			  $('a', $(this).parent()).attr('data-taskindex', parseInt($(this).attr('data-taskindex'))+1);
+	
+			  $(this).parents('tr').insertAfter( $(this).parents('tr').next() );
+			  
+			});
+		}
+		return false;
+	});
+	
+</script>
+
+

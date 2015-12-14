@@ -14,6 +14,10 @@
 		<?php endforeach; ?>
 	</tboby>
 	<tfoot>
+		<tr class="week_total week_<?php echo $weekNum&1?'i':'p' ?>">
+			<td><?php echo $this->timesheet->getTasksTimeByWeek($this->weekindex) ?></td>
+			<td>Total</td>
+		</tr>
 	</tfoot>
 </table>
 

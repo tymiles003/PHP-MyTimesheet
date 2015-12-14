@@ -12,6 +12,7 @@ class Timesheet
 	protected $info = null;
 	protected $tasksByWeeks = array();
 	protected $webStorageIndex = null;
+	protected $dates = array();
 	
 	public function __construct($id) 
 	{
@@ -19,10 +20,27 @@ class Timesheet
 		if($this->webStorageIndex->indexHasId($id)){
 			$this->info = $this->webStorageIndex->getIndexById($id);
 			$this->id = $id;
-			$this->createTasksTimesheetFromData(Yaml::parse(file_get_contents($this->info['absolutePath'])));
+			$this->extractDataTimesheet(Yaml::parse(file_get_contents($this->info['absolutePath'])));
 		} else {
 			throw new MyTimesheetException('Timesheet with id "' . $id . '" does not exists in index.');
 		}
+	}
+	
+	public function getStartDate()
+	{
+		return isset($this->dates['start'])?$this->dates['start']:null;
+	}
+	
+	public function getWeekDate($weeknum)
+	{
+		return isset($this->dates['week-' . $weeknum])?$this->dates['week-' . $weeknum]:null;
+	}
+	
+	public function setWeekDate($weeknum, $timestamp)
+	{
+		$timestamp = !is_int($timestamp)?time():$timestamp;
+		$this->dates['week-' . $weeknum] = date('Y-m-d', (int) $timestamp);
+		return $this;
 	}
 	
 	public function getName()
@@ -114,13 +132,25 @@ class Timesheet
 		return $this;
 	}
 	
-	public function createTasksTimesheetFromData($dataFile)
+	public function createDatesTimesheetFromData($dataFile)
 	{
-		foreach($dataFile[$this->getId()] as $weekName=>$dataWeek) {
-			$this->createTasksWeekFromData((int) explode('-',$weekName)[1], $dataWeek);
+		$this->dates = $dataFile;
+		return $this;
+	}
+	
+	public function extractDataTimesheet($dataFile)
+	{
+		foreach($dataFile[$this->getId()] as $index=>$data) {
+			
+			if(false !== strpos($index,'week-')){
+				$this->createTasksWeekFromData((int) explode('-',$index)[1], $data);
+			} elseif($index == 'dates'){
+				$this->createDatesTimesheetFromData($data);
+			}
 		}
 		return $this;
 	}
+	
 	
 	public function save()
 	{
@@ -134,6 +164,13 @@ class Timesheet
 					'name' => $task->getName(),
 					'time' => $task->getTime()
 				);
+			}
+		}
+		
+		$data['dates'] = array();
+		foreach($this->tasksByWeeks as $weekIndex=>$tasks){
+			if(null !== $this->getWeekDate($weekIndex)){
+				$data['dates']['week-' . $weekIndex] = $this->getWeekDate($weekIndex);
 			}
 		}
 		

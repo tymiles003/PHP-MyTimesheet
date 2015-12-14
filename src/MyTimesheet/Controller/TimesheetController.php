@@ -19,7 +19,11 @@ class TimesheetController extends MyTimesheetController
 	{
 		$id = mysql_escape_string($_GET['id']);
 		if(isset($_POST['ispost']) && '1'==$_POST['ispost']){
-			$this->edit();
+			if(!isset($_POST['editdate'])){
+				$this->edit();
+			} elseif($_POST['editdate'] == '1') {
+				$this->editDate();
+			}
 		}
 		
 		if($this->webStorageIndex->indexHasId($id)){
@@ -27,7 +31,8 @@ class TimesheetController extends MyTimesheetController
 			$this->view->setParameter('timesheet', new Timesheet($id));
 			$this->view->setParameter('header', array(
 					'title'=>array(1=>'Timesheet  -  ' . $this->view->timesheet->getName()),
-					'description'=>$this->view->timesheet->getName() . ' - Time spent : ' . $this->view->timesheet->getTasksTime() . ' days '
+					'description'=>$this->view->timesheet->getName() . ' - Time spent : ' . $this->view->timesheet->getTasksTime() . ' days ',
+					'project-date'=>null!==$this->view->timesheet->getStartDate()?$this->view->timesheet->getStartDate():$this->view->timesheet->getWeekDate(1)
 			));
 		} else {
 			$this->view->setTemplate('404');
@@ -85,6 +90,27 @@ class TimesheetController extends MyTimesheetController
 		}
 	}
 	
+	public function editDate()
+	{
+		if(!isset($_POST['date']) || empty($_POST['date'])){
+			return false;
+		}
+		
+		$id = mysql_escape_string($_GET['id']);
+		$weekindex = null;
+		if(isset($_GET['week'])){
+			$weekindex = mysql_escape_string((int) $_GET['week']);
+		}
+		
+		if(null !== $weekindex && $this->webStorageIndex->indexHasId($id)){
+			$timesheet = new Timesheet($id);
+			$timesheet->setWeekDate($weekindex, date_create_from_format('Y-m-d', $_POST['date'])->getTimestamp());
+			$timesheet->save();
+		} else {
+			$this->view->setTemplate('404_timesheet');
+		}
+	}
+	
 	public function edit()
 	{
 		$id = mysql_escape_string($_POST['id']);
@@ -126,8 +152,8 @@ class TimesheetController extends MyTimesheetController
 			// Save timesheet :
 			$timesheet->save();
 			
-			$this->view->setParameter('file', $file);
-			$this->view->setParameter('timesheet', $timesheet);
+			//$this->view->setParameter('file', $file);
+			//$this->view->setParameter('timesheet', $timesheet);
 		} else {
 			$this->view->setTemplate('404_timesheet');
 		}
@@ -146,7 +172,8 @@ class TimesheetController extends MyTimesheetController
 			switch($type){
 				default:
 				case 'html':
-					$this->view->header = array('title' => array(1=>$this->view->timesheet->getName()), 'description'=>'Timesheet pour la semaine (' . $week . ')');
+					$this->view->header = array('title' => array(1=>$this->view->timesheet->getName()), 'description'=>'Timesheet pour la semaine (' . $week . ')',
+											    'week-date' => $this->view->timesheet->getWeekDate($week));
 					$this->view->setParameter('weekindex', $week);
 					break;
 				case 'csv':

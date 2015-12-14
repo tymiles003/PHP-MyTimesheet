@@ -9,6 +9,20 @@
 	</theader>
 	<tboby>
 		<?php foreach($this->timesheet->getTasks() as $weekNum=>$tasks): ?>
+			<tr>
+				<td colspan="4">
+					<form name="" method="post" action="/timesheet?id=<?php echo $this->timesheet->getId() ?>&week=<?php echo $weekNum ?>" class="hidden-print row">
+						<div class="col-md-12">
+							<input type="hidden" name="ispost" value="1">
+							<input type="hidden" name="editdate" value="1">
+							<label class="hidden-xs control-label" for="form-in-time">Week <?php echo $weekNum ?> - date :</label>
+						    <input type="date" value="<?php echo $this->timesheet->getWeekDate($weekNum) ?>" name="date" class="form_datetime">
+						    <span class="glyphicon  glyphicon-calendar" aria-hidden="true"></span>
+						    <input type="submit" value="save" class="btn btn-default btn-xs"/>
+					    </div>
+					</form>
+				</td>
+			</tr>
 			<?php foreach($tasks as $task): ?>
 			<tr class="week_<?php echo $weekNum&1?'i':'p' ?>">
 				<td><?php echo $weekNum ?></td>

@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="favicon.ico">
+    <title>PHP-MyTimesheet github project.</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+  </head>
+  <body>
+    <style>
+        .panel-footer h2 {
+            font-size: 1em;
+            margin: 0px;
+            text-align: center;
+            line-height: 1.3em;
+            cursor: pointer;
+        }
+        .panel {
+            cursor: pointer
+        }
+        
+/* Carousel base class */
+.carousel {
+  height: 490px;
+  margin-bottom: 20px;
+}
+/* Since positioning the image, we need to help out the caption */
+.carouselCaption {
+    position: absolute;
+    z-index: 999;
+    height: 50px;
+    width: 100%;
+    top: 380px;
+    left: 0;
+    text-align: center;
+}
+
+/* Declare heights because of positioning of img element */
+.carousel .item {
+  background-color: transparent;
+}
+.carousel-inner > .item > img {
+  position: absolute;
+  top: 0;
+  left: 0;
+
+}
+.carousel-control {
+  background-color: transparent !important;
+  background-image: none !important;
+}
+.carousel-control:hover {
+  opacity: 0
+}
+
+.carousel-indicators li {
+  background-color: #AAA !important;
+  border: #AAA 1px solid !important;
+}
+
+.carousel-indicators li.active {
+  background-color: #EEE !important;
+}
+
+.item {
+  overflow: visible !important;
+}
+
+.carousel-inner {
+  overflow: visible !important;
+}
+
+    </style>
+    <div class="container">
+      <nav class="navbar navbar-default">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <a class="navbar-brand" href="#">PHP-MyTimesheet</a>
+          </div>
+          <div id="navbar" class="navbar-collapse collapse in">
+            <ul class="nav navbar-nav">
+              <li class="active"><a href="#">Screenshots</a></li>
+              <li><a href="#"><span class="fa fa-github"></span> GitHub sources </a></li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+        
+        <div class="row">
+            <div class="col-md-12">
+    <!-- Carousel -->
+    <div id="carousel" class="carousel slide" data-ride="carousel">
+      <!-- Indicators -->
+      <ol class="carousel-indicators">
+        <li data-target="#carousel" data-slide-to="0" class="active"></li>
+        <li data-target="#carousel" data-slide-to="1"></li>
+        <li data-target="#carousel" data-slide-to="2"></li>
+        <li data-target="#carousel" data-slide-to="3"></li>
+        <li data-target="#carousel" data-slide-to="4"></li>
+        <li data-target="#carousel" data-slide-to="5"></li>
+        <li data-target="#carousel" data-slide-to="6"></li>
+        <li data-target="#carousel" data-slide-to="7"></li>
+        <li data-target="#carousel" data-slide-to="8"></li>
+        <li data-target="#carousel" data-slide-to="9"></li>
+      </ol>
+      <div class="carousel-inner" role="listbox">
+        <div class="item active">
+            <div class="row">
+              <div class="col-md-2"></div>
+              <img src="images/screen_list_timesheets.PNG" alt="" class="col-md-8">
+              <div class="col-md-2"></div>
+            </div>
+            <div class="row carouselCaption">
+              <div class="col-md-2"></div>
+              <div class="col-md-8">Homepage<br/>Edit a timesheet</div>
+              <div class="col-md-2"></div>
+            </div>
+        </div>
+        <div class="item">
+            <div class="row">
+              <div class="col-md-2"></div>
+              <img src="images/screen_timesheet_myproject.PNG" alt="" class="col-md-8">
+              <div class="col-md-2"></div>
+            </div>
+            <div class="row carouselCaption">
+              <div class="col-md-2"></div>
+              <div class="col-md-8">Project<br/>page of empty project "MyProject"</div>
+              <div class="col-md-2"></div>
+            </div>
+        </div>
+        <div class="item">
+            <div class="row">
+              <div class="col-md-2"></div>
+              <img src="images/screen_timesheet_myproject_task0_creating.PNG" alt="" class="col-md-8">
+              <div class="col-md-2"></div>
+            </div>
+            <div class="row carouselCaption">
+              <div class="col-md-2"></div>
+              <div class="col-md-8">Project<br/>creating task in a project</h2></div>
+              <div class="col-md-2"></div>
+            </div>
+        </div>
+        <div class="item">
+            <div class="row">
+              <div class="col-md-2"></div>
+              <img src="images/screen_timesheet_myproject_task0_created.PNG" alt="" class="col-md-8">
+              <div class="col-md-2"></div>
+            </div>
+            <div class="row carouselCaption">
+              <div class="col-md-2"></div>
+              <div class="col-md-8">Project<br/>display tasks in a project</div>
+              <div class="col-md-2"></div>
+            </div>
+        </div>
+        <div class="item">
+            <div class="row">
+              <div class="col-md-2"></div>
+              <img src="images/screen_timesheet_myproject_task1_created.PNG" alt="" class="col-md-8">
+              <div class="col-md-2"></div>
+            </div>
+            <div class="row carouselCaption">
+              <div class="col-md-2"></div>
+              <div class="col-md-8">Project<br/>display tasks in a project</div>
+              <div class="col-md-2"></div>
+            </div>
+        </div>
+        <div class="item">
+            <div class="row">
+              <div class="col-md-2"></div>
+              <img src="images/screen_timesheet_myproject_task1_order.PNG" alt="" class="col-md-8">
+              <div class="col-md-2"></div>
+            </div>
+            <div class="row carouselCaption">
+              <div class="col-md-2"></div>
+              <div class="col-md-8">Project<br/>display tasks in a project</div>
+              <div class="col-md-2"></div>
+            </div>
+        </div>
+        <div class="item">
+            <div class="row">
+              <div class="col-md-2"></div>
+              <img src="images/screen_timesheet_myproject_task2_created.PNG" alt="" class="col-md-8">
+              <div class="col-md-2"></div>
+            </div>
+            <div class="row carouselCaption">
+              <div class="col-md-2"></div>
+              <div class="col-md-8">Project<br/>creating task in a project for a new week</div>
+              <div class="col-md-2"></div>
+            </div>
+        </div>
+        <div class="item">
+            <div class="row">
+              <div class="col-md-2"></div>
+              <img src="images/screen_timesheet_myproject_task2_weekdate.PNG" alt="" class="col-md-8">
+              <div class="col-md-2"></div>
+            </div>
+            <div class="row carouselCaption">
+              <div class="col-md-2"></div>
+              <div class="col-md-8">Project<br/>change date of a week</div>
+              <div class="col-md-2"></div>
+            </div>
+        </div>
+        <div class="item">
+            <div class="row">
+              <div class="col-md-2"></div>
+              <img src="images/screen_timesheet_myproject_week_export_html.PNG" alt="" class="col-md-8">
+              <div class="col-md-2"></div>
+            </div>
+            <div class="row carouselCaption">
+              <div class="col-md-2"></div>
+              <div class="col-md-8">Project<br/>export in HTML</div>
+              <div class="col-md-2"></div>
+            </div>
+        </div>
+        <div class="item">
+            <div class="row">
+              <div class="col-md-2"></div>
+              <img src="images/screen_timesheet_myproject_week_export_csv.PNG" alt="" class="col-md-8">
+              <div class="col-md-2"></div>
+            </div>
+            <div class="row carouselCaption">
+              <div class="col-md-2"></div>
+              <div class="col-md-8">Project<br/>export in CSV</div>
+              <div class="col-md-2"></div>
+            </div>
+        </div>
+      </div>
+      <!-- Controls -->
+      <a class="left carousel-control" href="#carousel" role="button" data-slide="prev">
+          <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+          <span class="sr-only">Previous</span>
+      </a>
+      <a class="right carousel-control" href="#carousel" role="button" data-slide="next">
+          <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+          <span class="sr-only">Next</span>
+      </a>
+    </div>
+    <!-- END Carousel -->
+            </div>
+        </div>   
+        
+        <div class="row">
+            <div class="col-md-12">
+                <div class="col-md-6">
+					<div class="panel panel-default">
+					  <div class="panel-body">
+					    <img src="images/screen_list_timesheets.PNG" class="col-xs-12 col-md-12"/>
+					  </div>
+					  <div class="panel-footer"><h2>Homepage<br/>List of timesheets</h2></div>
+					</div>
+				</div>
+                <div class="col-md-6">
+                    <div class="panel panel-default">
+                      <div class="panel-body">
+                        <img src="images/screen_list_timesheets_edit.PNG" class="col-xs-12 col-md-12"/>
+                      </div>
+                      <div class="panel-footer"><h2>Homepage<br/>Edit a timesheet</h2></div>
+                    </div>
+                </div>
+	         </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-12">
+                <div class="col-md-6">
+                    <div class="panel panel-default">
+                      <div class="panel-body">
+                        <img src="images/screen_timesheet_myproject.PNG" class="col-xs-12 col-md-12"/>
+                      </div>
+                      <div class="panel-footer"><h2>Project<br/>page of empty project "MyProject"</h2></div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                </div>
+             </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-12">
+                <div class="col-md-6">
+                    <div class="panel panel-default">
+                      <div class="panel-body">
+                        <img src="images/screen_timesheet_myproject_task0_creating.PNG" class="col-xs-12 col-md-12"/>
+                      </div>
+                      <div class="panel-footer"><h2>Project<br/>creating task in a project</h2></div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="panel panel-default">
+                      <div class="panel-body">
+                        <img src="images/screen_timesheet_myproject_task0_created.PNG" class="col-xs-12 col-md-12"/>
+                      </div>
+                      <div class="panel-footer"><h2>Project<br/>display created task in a project</h2></div>
+                    </div>
+                </div>
+             </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-12">
+                <div class="col-md-6">
+                    <div class="panel panel-default">
+                      <div class="panel-body">
+                        <img src="images/screen_timesheet_myproject_task1_created.PNG" class="col-xs-12 col-md-12"/>
+                      </div>
+                      <div class="panel-footer"><h2>Project<br/>display tasks in a project</h2></div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="panel panel-default">
+                      <div class="panel-body">
+                        <img src="images/screen_timesheet_myproject_task1_order.PNG" class="col-xs-12 col-md-12"/>
+                      </div>
+                      <div class="panel-footer"><h2>Project<br/>display tasks in a project</h2></div>
+                    </div>
+                </div>
+             </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-12">
+                <div class="col-md-6">
+                    <div class="panel panel-default">
+                      <div class="panel-body">
+                        <img src="images/screen_timesheet_myproject_task2_created.PNG" class="col-xs-12 col-md-12"/>
+                      </div>
+                      <div class="panel-footer"><h2>Project<br/>creating task in a project for a new week</h2></div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="panel panel-default">
+                      <div class="panel-body">
+                        <img src="images/screen_timesheet_myproject_task2_weekdate.PNG" class="col-xs-12 col-md-12"/>
+                      </div>
+                      <div class="panel-footer"><h2>Project<br/>change date of a week</h2></div>
+                    </div>
+                </div>
+             </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-12">
+                <div class="col-md-6">
+                    <div class="panel panel-default">
+                      <div class="panel-body">
+                        <img src="images/screen_timesheet_myproject_week_export_html.PNG" class="col-xs-12 col-md-12"/>
+                      </div>
+                      <div class="panel-footer"><h2>Project<br/>export in HTML</h2></div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="panel panel-default">
+                      <div class="panel-body">
+                        <img src="images/screen_timesheet_myproject_week_export_csv.PNG" class="col-xs-12 col-md-12"/>
+                      </div>
+                      <div class="panel-footer"><h2>Project<br/>export in CSV</h2></div>
+                    </div>
+                </div>
+             </div>
+        </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" 
+	      integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" 
+	      crossorigin="anonymous">
+	
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" 
+	      integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" 
+	      crossorigin="anonymous">
+	
+    <link rel="stylesheet" href="css/bootstrap-social.css">
+
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" 
+	        integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" 
+	        crossorigin="anonymous"></script>
+	
+  </body>
+</html>
